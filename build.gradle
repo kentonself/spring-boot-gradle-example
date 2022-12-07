@@ -1,10 +1,20 @@
 buildscript {
     repositories {
         mavenCentral()
+        maven {
+         url     "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.9.RELEASE")  // spring boot gradle plugin will used for generate jar
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.5.0.RELEASE")  // spring boot gradle plugin will used for generate jar
+        classpath('io.spring.gradle:dependency-management-plugin:1.1.0')
     }
+}
+
+plugins {
+    id 'java'                                // plugin for java
+    id 'org.springframework.boot'   version "2.5.0"  // plugin for spring boot framework
+    id 'io.spring.dependency-management' version "1.1.0"
 }
 
 repositories {
@@ -13,20 +23,17 @@ repositories {
 
 description = "Spring boot Gradle Example"
 
-apply plugin: 'java'                                // plugin for java
-apply plugin: 'org.springframework.boot'            // plugin for spring boot framework
-
 jar {
     baseName = 'spring-boot-gradle-example'             // jar file name
     version =  '1.0.0'                                  // application version
 }
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")     // web application dependency
+    implementation ("org.springframework.boot:spring-boot-starter-web")     // web application dependency
 }
 
-sourceCompatibility = 1.8                               // for Java 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 11
+targetCompatibility = 11
 
 group 'spring-boot-demo'
 version '1.0-SNAPSHOT'
